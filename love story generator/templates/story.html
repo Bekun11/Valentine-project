@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Your Love Story</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div id="storyContainer">
+        <h1>Your Interactive Love Story</h1>
+        <p id="storyText">Loading your story...</p>
+        <div id="choices">
+            <!-- Choice buttons will be injected here -->
+        </div>
+        <!-- Hidden fields to track the current node and story ID -->
+        <input type="hidden" id="currentNode" value="{{ node }}">
+        <input type="hidden" id="storyId" value="{{ story_id }}">
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        // On page load, fetch the current story node details via AJAX.
+        const storyId = document.getElementById('storyId').value;
+        const currentNode = document.getElementById('currentNode').value;
+        fetch(`/ajax/story/${currentNode}/${storyId}`)
+          .then(response => response.json())
+          .then(data => {
+              document.getElementById('storyText').innerText = data.text;
+              const choicesDiv = document.getElementById('choices');
+              choicesDiv.innerHTML = '';
+              for (const [choiceLabel, nextNode] of Object.entries(data.choices)) {
+                  const btn = document.createElement('button');
+                  btn.innerText = choiceLabel;
+                  btn.className = 'choice-btn';
+                  btn.setAttribute('data-choice', choiceLabel);
+                  choicesDiv.appendChild(btn);
+              }
+          })
+          .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>

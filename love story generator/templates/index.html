@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Хайрын түүх үүсгэгч</title>
+    <style>
+        /* Same styles as before */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe4e1;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        #story-image {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 0 auto 20px;
+            display: none;
+        }
+        #choices button {
+            margin: 10px 0;
+        }
+        audio {
+            display: none; /* Hide audio controls */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Хайрын түүх үүсгэгч</h1>
+        <form id="start-form">
+            <label for="name">Таны нэр:</label>
+            <input type="text" id="name" name="name" placeholder="Өөрийн нэрээ оруулна уу" required>
+            <button type="submit">Түүхийг эхлүүлэх</button>
+        </form>
+        <div id="story-container" style="display: none;">
+            <img id="story-image" src="" alt="Scene Image">
+            <p id="story-text"></p>
+            <div id="choices"></div>
+        </div>
+        <audio id="love-song" src="/static/audio/ReelAudio-90075.mp3"></audio> <!-- Add the love song -->
+    </div>
+
+    <script>
+        document.getElementById("start-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const name = document.getElementById("name").value;
+
+            fetch("/story", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    let currentScene = "start";
+
+                    function displayScene(sceneKey) {
+                        const scene = data[sceneKey];
+
+                        // Update the story text
+                        document.getElementById("story-text").innerText = scene.text;
+
+                        // Update the image
+                        const storyImage = document.getElementById("story-image");
+                        if (scene.image) {
+                            storyImage.src = scene.image;
+                            storyImage.style.display = "block";
+                        } else {
+                            storyImage.style.display = "none";
+                        }
+
+                        // Update choices
+                        const choicesContainer = document.getElementById("choices");
+                        choicesContainer.innerHTML = "";
+                        if (scene.choices) {
+                            for (const [choiceText, nextScene] of Object.entries(scene.choices)) {
+                                const button = document.createElement("button");
+                                button.innerText = choiceText;
+                                button.onclick = () => displayScene(nextScene);
+                                choicesContainer.appendChild(button);
+                            }
+                        } else if (scene.isPositiveEnding) {
+                            // If it's a positive ending, play the love song
+                            const loveSong = document.getElementById("love-song");
+                            loveSong.play();
+                        }
+                    }
+
+                    // Show the story container, hide the form
+                    document.getElementById("start-form").style.display = "none";
+                    document.getElementById("story-container").style.display = "block";
+
+                    // Start with the first scene
+                    displayScene(currentScene);
+                });
+        });
+    </script>
+</body>
+</html>

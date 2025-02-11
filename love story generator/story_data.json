@@ -1,0 +1,41 @@
+{
+  "start": {
+    "text": "Сайн уу, {name}. Чамтай уулзсан анхны мөч үнэхээр онцгой санагдаж байна. Энэ аялал бол миний сэтгэлийн үгсийг чамд хүргэх жижигхэн түүх юм. Хэрэв сонирхож байвал цааш үргэлжлүүлье?",
+    "image": "https://media.tenor.com/6xMTFNU-4IQAAAAi/baby-bear-brown.gif",
+    "choices": {
+      "Тийм ээ, сонирхолтой байна!": "first_meeting"
+    }
+  },
+  "first_meeting": {
+    "text": "Амьдрал заримдаа энгийн мөчүүдээрээ гайхамшгийг бүтээдэг. Бидний анхны уулзалт ч мөн адил энгийн мөртлөө миний зүрхэнд мартагдашгүй сайхан мэдрэмж үлдээсэн.",
+    "image": "https://media.tenor.com/vmvaMX3F-3IAAAAi/hehehehe.gif",
+    "choices": {
+      "Дараагийнхыг үзье": "special_message"
+    }
+  },
+  "special_message": {
+    "text": "{name}, чи надад үнэхээр гайхалтай сэтгэгдэл төрүүлдэг. Миний сэтгэлд чамайг харсан мөчөөс эхлэн нэгэн дулаан, гэгээлэг мэдрэмж төрсөн.",
+    "image": "https://media.tenor.com/-aW73OVUtyYAAAAi/tkthao219-bubududu.gif",
+    "choices": {
+      "Үргэлжлүүлье": "valentine_invitation"
+    }
+  },
+  "valentine_invitation": {
+    "text": "Тиймээс би чамд нэгэн энгийн боловч чин сэтгэлийн санал тавих гэсэн юм: \"Миний Валентина болооч?\"",
+    "image": "https://media.tenor.com/4bV9ylEOWpgAAAAi/bubu-dudu-sseeyall.gif",
+    "choices": {
+      "Тийм ээ!": "positive_ending",
+      "Эелдэг татгалзах": "polite_decline"
+    }
+  },
+  "positive_ending": {
+    "text": "Чиний инээмсэглэл бидний түүхийн эхлэл болж, энэ өдөр зүрх сэтгэлд минь мартагдашгүй дурсамж болон үлдэх болно. Хамтдаа ирээдүйгээ дурсамжаар дүүрэн гайхалтай аялал болгоцгооё.",
+    "image": "https://media.tenor.com/Ddw70xVXPPcAAAAi/milk-and-mocha.gif",
+    "isPositiveEnding": true
+  },
+  "polite_decline": {
+    "text": "Чиний хүндэтгэлтэй, эелдэг хариултыг хүлээн авч байна.",
+    "image": "https://media.tenor.com/QOzMqPvW8PUAAAAj/love-you.gif",
+    "choices": {}
+  }
+}

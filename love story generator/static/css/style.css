@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #fff0f6;
+    padding: 20px;
+}
+
+#storyContainer {
+    max-width: 600px;
+    margin: auto;
+    background: #ffe6e6;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 8px;
+    margin: 5px 0;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.choice-btn {
+    background-color: #ff99aa;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.choice-btn:hover {
+    background-color: #ff6699;
+}
